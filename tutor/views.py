@@ -54,3 +54,28 @@ def booking_information(request, bookingID):
     for booking in bookings:
         if booking['bookingID'] == bookingID:
             return render(request, 'booking_information.html', booking)
+
+
+def tutorBookings(request):
+    '''
+    if form.is_valid():
+        # form.save()
+        email = form.cleaned_data['email']
+        # department = form.cleaned_data['department']
+        password = form.cleaned_data['password']
+        # print(email)
+        # print(department)
+        # print(password)
+        user = Users(email=email, password=password, status=1)
+        user.save()
+        # password = form.cleaned_data['password1']
+        # user = authenticate(username=username, password=password)
+        # login(request, user)
+        # return redirect('index')
+        context = {'email': email, 'password': password}
+        return render(request, 'ix_tutor/index.html', context)
+    else:
+        form = RegisterForm()
+
+    '''
+    return render(request, 'tutor_bookings.html')
