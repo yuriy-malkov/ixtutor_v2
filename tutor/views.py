@@ -54,3 +54,6 @@ def booking_information(request, bookingID):
     for booking in bookings:
         if booking['bookingID'] == bookingID:
             return render(request, 'booking_information.html', booking)
+
+def view_enrolled(request):
+    return render(request, 'enrolled.html', {"list" : bookings})
