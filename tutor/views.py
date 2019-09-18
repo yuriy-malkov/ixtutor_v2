@@ -41,7 +41,7 @@ def register(request):
             password = form.cleaned_data['password']
             user = Users(email=email, password=password, status=1)
             user.save()
-            context = {'email': email, 'password': password}
+            context = {'email': email, 'userID':  model_to_dict(user)['userID']}
             return render(request, 'ix_tutor/index.html', context)
     else:
         form = RegisterForm()
@@ -65,7 +65,7 @@ def login(request):
                 return render(request, 'registration/login.html', context)
             userID = model_to_dict(user)['userID']
             context = {'email': email, 'userID': userID}
-            return render(request, 'ix_tutor/index.html', context)
+            return render(request, 'user_types.html', context)
     else:
         form = RegisterForm()
     context = {'form': form}
@@ -74,3 +74,13 @@ def login(request):
 
 def view_all_bookings(request):
     return render(request, 'all_bookings.html', {"list": bookings})
+
+
+def userType(request):
+    return render(request, 'user_types.html')
+
+
+def booking_information(request, bookingID):
+    for booking in bookings:
+        if booking['bookingID'] == bookingID:
+            return render(request, 'booking_information.html', booking)

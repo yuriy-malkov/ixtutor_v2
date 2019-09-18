@@ -10,19 +10,14 @@
         <thead>
             <tr>
                 <th>Booking ID</th>
-                <th>Tutor ID</th>
                 <th>Interest ID</th>
-                <th>Room ID</th>
-                <th>Slot ID</th>
             </tr>
         </thead>
         {% for booking in list %}
         <tr>
-            <td>{{booking.bookingID}}</td>
-            <td>{{booking.tutorID}}</td>
+            <td >
+                <a href="/user/bookings/{{booking.bookingID}}">{{booking.bookingID}}</a></td>
             <td>{{booking.interestID}}</td>
-            <td>{{booking.roomID}}</td>
-            <td>{{booking.slotID}}</td>
         </tr>
         {% endfor %}
     </table>

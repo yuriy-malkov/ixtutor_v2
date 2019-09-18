@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+
 <html lang="eng">
 <head>
   <meta charset="UTF-8">
@@ -22,7 +25,6 @@
     {% csrf_token %}
     <p><input type="submit" value="login"></p>
   </form>
-
-
-
 </body>
+</html>
+{% endblock %}
