@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Enrolled</title>
+</head>
+<h1>View Enrolled Sessions</h1>
+<body method="get" action="{% url 'viewEnrolledSessions' %}">
+    <table>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Interest ID</th>
+                <th>Room</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        {% for booking in list %}
+        <tr>
+            <td >
+                <a href="/user/bookings/{{booking.bookingID}}">{{booking.bookingID}}</a></td>
+            <td >
+                <a href="/user/bookings/{{booking.interestID}}">{{booking.interestID}}</a></td>
+                <td >
+                <a href="/user/bookings/{{booking.roomID}}">{{booking.roomID}}</a></td>
+                <td >
+                <a href="/user/bookings/{{booking.slotID}}">{{booking.slotID}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
