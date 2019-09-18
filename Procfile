@@ -1,1 +1,1 @@
-python-3.7.3
+web gunicorn team_merky.wsgi --log-file -
