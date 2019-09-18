@@ -27,27 +27,25 @@ def register(request):
     return render(request, 'registration/register.html', context)
 
 def view_all_bookings(request):
-    bookings = [
-        {
-            tutorID : 1,
-            bookingID: 20,
-            interestID: 30,
-            roomID: 40, 
-            slotID: 50
+    bookings = [{
+            'tutorID' : 1,
+            'bookingID' : 20,
+            'interestID' : 30,
+            'roomID' : 40, 
+            'slotID' : 50
         },
         {
-            tutorID : 2,
-            bookingID: 30,
-            interestID: 40,
-            roomID: 50, 
-            slotID: 60
+            'tutorID' : 2,
+            'bookingID': 30,
+            'interestID': 40,
+            'roomID': 50, 
+            'slotID': 60
         },
         {
-            tutorID : 3,
-            bookingID: 15,
-            interestID: 25,
-            roomID: 35, 
-            slotID: 45
-        }
-    ]
-    return render(request, 'all_bookings.html', bookings)
+            'tutorID' : 3,
+            'bookingID': 15,
+            'interestID': 25,
+            'roomID': 35, 
+            'slotID': 45
+        }]
+    return render(request, 'all_bookings.html', {"list" : bookings})
