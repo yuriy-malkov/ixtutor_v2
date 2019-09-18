@@ -1,29 +1,31 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
-from . import models
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
+from django.forms.models import model_to_dict
+from .forms import RegisterForm
+from .models import Users
 
 bookings = [{
-            'tutorID' : 1,
-            'bookingID' : 20, 
-            'interestID' : 30,
-            'roomID' : 40, 
-            'slotID' : 50
-        },
-        {
-            'tutorID' : 2,
-            'bookingID': 30,
-            'interestID': 40,
-            'roomID': 50, 
-            'slotID': 60
-        },
-        {
-            'tutorID' : 3,
-            'bookingID': 15,
-            'interestID': 25,
-            'roomID': 35, 
-            'slotID': 45
-        }]
+    'tutorID': 1,
+    'bookingID': 20,
+    'interestID': 30,
+    'roomID': 40,
+    'slotID': 50
+},
+    {
+        'tutorID': 2,
+        'bookingID': 30,
+        'interestID': 40,
+        'roomID': 50,
+        'slotID': 60
+    },
+    {
+        'tutorID': 3,
+        'bookingID': 15,
+        'interestID': 25,
+        'roomID': 35,
+        'slotID': 45
+    }]
+
 
 # Create your views here.
 def index(request):
@@ -32,22 +34,43 @@ def index(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
 
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('index')
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = Users(email=email, password=password, status=1)
+            user.save()
+            context = {'email': email, 'password': password}
+            return render(request, 'ix_tutor/index.html', context)
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
 
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
+
+def login(request):
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                user = Users.objects.get(email=email, password=password, status=1)
+            except ObjectDoesNotExist:
+                context = {'form': form}
+                return render(request, 'registration/login.html', context)
+            userID = model_to_dict(user)['userID']
+            context = {'email': email, 'userID': userID}
+            return render(request, 'ix_tutor/index.html', context)
+    else:
+        form = RegisterForm()
+    context = {'form': form}
+    return render(request, 'registration/login.html', context)
+
+
 def view_all_bookings(request):
-
-    return render(request, 'all_bookings.html', {"list" : bookings})
-
+    return render(request, 'all_bookings.html', {"list": bookings})

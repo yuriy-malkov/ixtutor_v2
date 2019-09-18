@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.db import models
+
 
 # Create your models here.
 
 class Departments(models.Model):
-    deptID = models.PositiveIntegerField(
+    deptID = models.AutoField(
         primary_key=True,
         null=False,
         editable=False
@@ -14,12 +12,10 @@ class Departments(models.Model):
     name = models.TextField(
         max_length=255
     )
-    def __str__(self):
-        return 'Dept ID:' + str(self.deptID)
+
 
 class Interests(models.Model):
-
-    interestID = models.PositiveIntegerField(
+    interestID = models.AutoField(
         primary_key=True,
         null=False,
         editable=False
@@ -27,11 +23,10 @@ class Interests(models.Model):
     name = models.TextField(
         max_length=255
     )
-    def __str__(self):
-        return 'Interest ID:' + str(self.interestID)
+
 
 class Rooms(models.Model):
-    roomID = models.PositiveIntegerField(
+    roomID = models.AutoField(
         primary_key=True,
         null=False,
         editable=False
@@ -39,11 +34,10 @@ class Rooms(models.Model):
     name = models.TextField(
         max_length=255
     )
-    def __str__(self):
-        return 'Room ID:' + str(self.roomID)
+
 
 class TimeSlots(models.Model):
-    timeSlotID = models.PositiveIntegerField(
+    timeSlotID = models.AutoField(
         primary_key=True,
         null=False,
         editable=False
@@ -51,11 +45,10 @@ class TimeSlots(models.Model):
     name = models.TextField(
         max_length=255
     )
-    def __str__(self):
-        return 'Time Slot ID:' + str(self.timeSlotID)
+
 
 class Days(models.Model):
-    dayID = models.PositiveIntegerField(
+    dayID = models.AutoField(
         primary_key=True,
         null=False,
         editable=False
@@ -63,8 +56,7 @@ class Days(models.Model):
     name = models.TextField(
         max_length=255
     )
-    def __str__(self):
-        return 'Day ID:' + str(self.dayID)
+
 
 class Availability(models.Model):
     YES = 1
@@ -74,7 +66,7 @@ class Availability(models.Model):
         (YES, 'Yes')
     )
 
-    bookingID = models.PositiveIntegerField(
+    bookingID = models.AutoField(
         primary_key=True,
         null=False,
         editable=False
@@ -85,18 +77,17 @@ class Availability(models.Model):
     )
     dayID = models.ForeignKey(
         'Days',
-         on_delete=models.CASCADE
+        on_delete=models.CASCADE
     )
     roomID = models.ForeignKey(
         'Rooms',
-         on_delete=models.CASCADE
+        on_delete=models.CASCADE
     )
     timeSlotID = models.ForeignKey(
         'TimeSlots',
-         on_delete=models.CASCADE
+        on_delete=models.CASCADE
     )
-    def __str__(self):
-        return 'Day ID:' + str(self.dayID)
+
 
 class Users(models.Model):
     ACTIVE = 1
@@ -113,10 +104,9 @@ class Users(models.Model):
         (YES, 'Yes')
     )
 
-    userID = models.PositiveIntegerField(
+    userID = models.AutoField(
         primary_key=True,
-        null=False,
-        editable=False
+        null=False
     )
     email = models.EmailField(
         max_length=30,
@@ -136,49 +126,40 @@ class Users(models.Model):
         choices=OCCUPATION,
         default=0
     )
-    deptID = models.ForeignKey(
-        Departments,
-        on_delete=models.CASCADE
-    )
-    def __str__(self):
-        return 'refers to departments reference:' + self.Departments.deptID
+
 
 class UserInterests(models.Model):
-        userID = models.ForeignKey(
-            'Users',
-            on_delete=models.CASCADE
-        )
-        interestID = models.ForeignKey(
-            'Interests',
-            on_delete=models.CASCADE
-        )
-        def __str__(self):
-            return 'refers to departments reference:' + self.Interests.interestID + self.Users.userID
+    userID = models.ForeignKey(
+        'Users',
+        on_delete=models.CASCADE
+    )
+    interestID = models.ForeignKey(
+        'Interests',
+        on_delete=models.CASCADE
+    )
+
 
 class TutorBookings(models.Model):
-        bookingID = models.ForeignKey(
-            'Availability',
-            on_delete=models.CASCADE
-        )
-        userID = models.ForeignKey(
-            'Users',
-            on_delete=models.CASCADE
-        )
-        interestID = models.ForeignKey(
-            'Interests',
-            on_delete=models.CASCADE
-        )
-        def __str__(self):
-            return 'refers to Availability reference:' + self.Interests.interestID + self.Users.userID + self.Availability.bookingID
+    bookingID = models.ForeignKey(
+        'Availability',
+        on_delete=models.CASCADE
+    )
+    userID = models.ForeignKey(
+        'Users',
+        on_delete=models.CASCADE
+    )
+    interestID = models.ForeignKey(
+        'Interests',
+        on_delete=models.CASCADE
+    )
+
 
 class StudentEnroll(models.Model):
-        userID = models.ForeignKey(
-            'Users',
-            on_delete=models.CASCADE
-        )
-        enrollID = models.ForeignKey(
-            'Availability',
-            on_delete=models.CASCADE
-        )
-        def __str__(self):
-            return 'refers to Availability reference:' + self.Users.userID + self.Availability.bookingID
+    userID = models.ForeignKey(
+        'Users',
+        on_delete=models.CASCADE
+    )
+    enrollID = models.ForeignKey(
+        'Availability',
+        on_delete=models.CASCADE
+    )
