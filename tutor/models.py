@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Departments(models.Model):
     deptID = models.PositiveIntegerField(
         primary_key=True,
@@ -98,6 +99,7 @@ class Availability(models.Model):
     def __str__(self):
         return 'Day ID:' + str(self.dayID)
 
+
 class Users(models.Model):
     ACTIVE = 1
     DEACTIVE = 2
@@ -155,6 +157,7 @@ class UserInterests(models.Model):
         def __str__(self):
             return 'refers to departments reference:' + self.Interests.interestID + self.Users.userID
 
+
 class TutorBookings(models.Model):
         bookingID = models.ForeignKey(
             'Availability',
@@ -170,6 +173,7 @@ class TutorBookings(models.Model):
         )
         def __str__(self):
             return 'refers to Availability reference:' + self.Interests.interestID + self.Users.userID + self.Availability.bookingID
+
 
 class StudentEnroll(models.Model):
         userID = models.ForeignKey(

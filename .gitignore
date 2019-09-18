@@ -1,6 +1,14 @@
-.idea
+#PyCharm IDE
+.idea/
 
-# Byte-compiled / optimized / DLL files
-__pycache__/
+# Django #
+*.log
+*.pot
+*.pyc
+
+# Backup files #
+*.bak
+
+# Python #
 *.py[cod]
 *$py.class
