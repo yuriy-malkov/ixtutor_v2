@@ -1,1 +1,1 @@
-web gunicorn team_merky.wsgi --log-file -
+web gunicorn ixtutor_v2.wsgi --log-file -
