@@ -48,6 +48,9 @@ def register(request):
     return render(request, 'registration/register.html', context)
 
 def view_all_bookings(request):
-
     return render(request, 'all_bookings.html', {"list" : bookings})
 
+def booking_information(request, bookingID):
+    for booking in bookings:
+        if booking['bookingID'] == bookingID:
+            return render(request, 'booking_information.html', booking)
