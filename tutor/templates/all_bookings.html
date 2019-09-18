@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookings</title>
+</head>
+<h1>View Bookings</h1>
+<body method="get" action="{% url 'viewAllBookings' %}">
+    <table>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Tutor ID</th>
+                <th>Interest ID</th>
+                <th>Room ID</th>
+                <th>Slot ID</th>
+            </tr>
+        </thead>
+        {% for booking in list %}
+        <tr>
+            <td>{{booking.bookingID}}</td>
+            <td>{{booking.tutorID}}</td>
+            <td>{{booking.interestID}}</td>
+            <td>{{booking.roomID}}</td>
+            <td>{{booking.slotID}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
