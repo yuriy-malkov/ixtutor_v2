@@ -83,7 +83,10 @@ DATABASES = {
         'PASSWORD': 'tutor',
         'HOST': 'localhost',
         'PORT': '5432',
-        'SSL': True
+        'OPTIONS':  {
+            'sslmode': True
+        }
+
     }
 }
 
