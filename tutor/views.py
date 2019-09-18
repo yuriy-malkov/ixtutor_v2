@@ -51,3 +51,7 @@ def view_all_bookings(request):
 
     return render(request, 'all_bookings.html', {"list" : bookings})
 
+def tutorBookings(request):
+	print(request)
+	return HttpResponse('ok')
+	return render(request, 'tutor_bookings.html', {"list" : bookings})
