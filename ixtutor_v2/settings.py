@@ -25,7 +25,7 @@ SECRET_KEY = 'fsu#3#l^49)w8pk_%-42t)_^y-u)+9olu!4353w4pd7ya^q6p-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ixtutor-v2.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
