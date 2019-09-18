@@ -234,3 +234,4 @@ def view_created_bookings(userID):
             createdBookings.append(booking)
     return createdBookings
 
+
